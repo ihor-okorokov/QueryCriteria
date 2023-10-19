@@ -7,11 +7,6 @@ use IhorOk\QueryCriteria\CriteriaScopes;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
-/**
- * Criteria for adds alias in expression SQL query 'FROM `table` as alias'.
- *
- * @package IhorOk\QueryCriteria\Criteria
- */
 class RootAlias implements Criteria {
 	/**
 	 * @var string

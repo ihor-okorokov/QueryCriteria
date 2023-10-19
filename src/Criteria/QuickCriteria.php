@@ -7,11 +7,6 @@ use IhorOk\QueryCriteria\Helpers\HasJoins;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
-/**
- * Criteria using an anonymous function to quickly describe the conditions of the builder query without creating a separate criterion.
- *
- * @package IhorOk\QueryCriteria\Criteria
- */
 class QuickCriteria implements Criteria {
 	use HasJoins;
 

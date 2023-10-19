@@ -8,11 +8,6 @@ use IhorOk\QueryCriteria\Support\Arr;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
-/**
- * Base criteria for search items by primary key.
- *
- * @package IhorOk\QueryCriteria\Criteria
- */
 class Where implements Criteria {
 	/**
 	 * @var array $values

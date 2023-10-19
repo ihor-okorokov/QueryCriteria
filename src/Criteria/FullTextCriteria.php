@@ -7,11 +7,6 @@ use IhorOk\QueryCriteria\CriteriaScopes;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
-/**
- * Base criteria for fulltext search in items.
- *
- * @package App\Criteria\Base
- */
 class FullTextCriteria implements Criteria {
 	/**
 	 * @var string

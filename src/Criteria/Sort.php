@@ -7,11 +7,6 @@ use IhorOk\QueryCriteria\CriteriaScopes;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
-/**
- * Base criteria for sort items.
- *
- * @package IhorOk\QueryCriteria\Criteria
- */
 class Sort implements Criteria {
 	/**
 	 * @var string|null
