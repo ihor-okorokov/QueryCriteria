@@ -1,0 +1,144 @@
+<?php
+
+namespace IhorOk\QueryCriteria\Helpers;
+
+use IhorOk\QueryCriteria\Criteria\Limit;
+use IhorOk\QueryCriteria\Criteria\Take;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginatorContract;
+use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+trait HasCriteriaSelector {
+	/**
+	 * @var IlluminateEloquentBuilder|IlluminateQueryBuilder|null
+	 */
+	protected $queryBuilder = null;
+
+	/**
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 *
+	 * @return $this
+	 */
+	public function setQueryBuilder($builder): static {
+		$this->queryBuilder = $builder;
+
+		return $this;
+	}
+
+	/**
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|null
+	 */
+	public function getQueryBuilder() {
+		return $this->queryBuilder;
+	}
+
+	/**
+	 * @param  bool $onlyWithCriteriaSet
+	 *
+	 * @return Collection
+	 */
+	public function fetchAllWithCriteria(bool $onlyWithCriteriaSet = false): Collection {
+		return $this->fetchWithCriteria(total: -1, onlyWithCriteriaSet: $onlyWithCriteriaSet);
+	}
+
+	/**
+	 * @param  int $total
+	 * @param  int $page
+	 * @param  bool $onlyWithCriteriaSet
+	 *
+	 * @return Collection
+	 */
+	public function fetchWithCriteria(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): Collection {
+		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList())) return new Collection();
+
+		return $this
+			->includeCriteria(new Take($total, $page))
+			->includeCriteria(new Limit($total))
+			->compose($this->queryBuilder)
+			->get();
+	}
+
+	/**
+	 * @param  int $total
+	 * @param  int $page
+	 * @param  bool $onlyWithCriteriaSet
+	 *
+	 * @return LengthAwarePaginatorContract
+	 */
+	public function paginateWithCriteria(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): LengthAwarePaginatorContract {
+		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
+			return new LengthAwarePaginator(new Collection(), 0, $total);
+
+		return $this->compose($this->queryBuilder)->paginate(perPage: $total, page: $page);
+	}
+
+	/**
+	 * @param  bool $onlyWithCriteriaSet
+	 * @param  bool $throwFailCase
+	 *
+	 * @return Model|null
+	 */
+	public function firstWithCriteria(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): Model|null {
+		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
+			return null;
+
+		$query = $this->compose($this->queryBuilder);
+
+		return $throwFailCase ? $query->firstOrFail() : $query->first();
+	}
+
+	/**
+	 * @param  bool $onlyWithCriteriaSet
+	 *
+	 * @return int
+	 */
+	public function countWithCriteria(bool $onlyWithCriteriaSet = false): int {
+		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
+			return 0;
+
+		return $this->compose($this->queryBuilder)->count();
+	}
+
+	/**
+	 * @param  bool $onlyWithCriteriaSet
+	 *
+	 * @return bool
+	 */
+	public function existsWithCriteria(bool $onlyWithCriteriaSet = false): bool {
+		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
+			return false;
+
+		return $this->compose($this->queryBuilder)->exists();
+	}
+
+	/**
+	 * @param  callable $callback
+	 * @param  int $total
+	 * @param  bool $onlyWithCriteriaSet
+	 *
+	 * @return void
+	 */
+	public function chunkWithCriteria(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void {
+		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
+			return;
+
+		$this->compose($this->queryBuilder)->chunk($total, $callback);
+	}
+
+	/**
+	 * @param  callable $callback
+	 * @param  int $total
+	 * @param  bool $onlyWithCriteriaSet
+	 *
+	 * @return void
+	 */
+	public function eachWithCriteria(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void {
+		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
+			return;
+
+		$this->compose($this->queryBuilder)->each($callback, $total);
+	}
+}

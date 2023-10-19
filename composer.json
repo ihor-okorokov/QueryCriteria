@@ -1,0 +1,22 @@
+{
+    "name": "ihor-ok/query-criteria",
+    "description": "Query criteria scopes by OOP.",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^10.28",
+        "baopham/dynamodb": "^6.4"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "IhorOk\\QueryCriteria\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ihor Okorokov"
+        }
+    ],
+    "minimum-stability": "stable"
+}
