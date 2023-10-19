@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 trait CriteriaScopes {
 	/**
+	 * Alias for FROM case in SQL query.
+	 *
 	 * @var string|null
 	 */
 	protected string|null $queryRootAlias = null;
