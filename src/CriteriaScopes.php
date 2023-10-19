@@ -29,7 +29,6 @@ trait CriteriaScopes {
 	/**
 	 * @var string|null
 	 */
-	// TODO: test
 	protected string|null $queryRootAlias = null;
 
 	/**
