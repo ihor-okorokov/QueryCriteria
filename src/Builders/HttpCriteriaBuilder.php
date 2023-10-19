@@ -15,7 +15,7 @@ use Illuminate\Support\Arr;
 /**
  * Criteria builder for building a query based on a list of criteria filtered based on the query.
  *
- * @package App\Criteria
+ * @package IhorOk\QueryCriteria\Builders
  */
 abstract class HttpCriteriaBuilder implements CriteriaBuilder {
 	use HasUnion, HasDynamoDb, HasCriteriaSelector;

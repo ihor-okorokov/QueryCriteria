@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 /**
  * Criteria builder with collection of this criteria. Use Laravel's Collection for store this criteria.
  *
- * @package App\Criteria
+ * @package IhorOk\QueryCriteria\Builders
  */
 class CriteriaCollection implements CriteriaBuilder {
 	use HasUnion, HasDynamoDb, HasCriteriaSelector;
@@ -22,7 +22,7 @@ class CriteriaCollection implements CriteriaBuilder {
 	/**
 	 * Store for criteria.
 	 *
-	 * @var Collection $collection
+	 * @var Collection
 	 */
 	private Collection $collection;
 
