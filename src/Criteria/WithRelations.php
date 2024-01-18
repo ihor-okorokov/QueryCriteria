@@ -3,6 +3,7 @@
 namespace IhorOk\QueryCriteria\Criteria;
 
 use IhorOk\QueryCriteria\Criteria;
+use IhorOk\QueryCriteria\CriteriaScopes;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
@@ -31,9 +32,9 @@ class WithRelations implements Criteria {
 	}
 
 	/**
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function apply($builder) {
 		return $builder->with(array_merge(static::relations(), $this->relations));

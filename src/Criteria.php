@@ -14,9 +14,9 @@ interface Criteria {
 	/**
 	 * Apply criteria conditions to query builder.
 	 *
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function apply($builder);
 }

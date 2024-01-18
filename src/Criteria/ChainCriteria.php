@@ -3,6 +3,7 @@
 namespace IhorOk\QueryCriteria\Criteria;
 
 use IhorOk\QueryCriteria\Criteria;
+use IhorOk\QueryCriteria\CriteriaScopes;
 use IhorOk\QueryCriteria\Helpers\HasJoins;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
@@ -41,9 +42,9 @@ class ChainCriteria implements Criteria {
 	}
 
 	/**
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function apply($builder) {
 		$this->applyJoins($builder);
@@ -54,7 +55,7 @@ class ChainCriteria implements Criteria {
 		}
 
 		$callback = function ($builder) {
-			/* @var IlluminateEloquentBuilder|IlluminateQueryBuilder $builder */
+			/* @var IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder */
 			foreach ($this->list as $criteria)
 				$criteria->apply($builder);
 

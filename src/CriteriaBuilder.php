@@ -22,9 +22,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	/**
 	 * Returns builder by applies criteria.
 	 *
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function compose($builder);
 
@@ -32,9 +32,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	 * Returns builder by applied single criteria.
 	 *
 	 * @param  Criteria $criteria
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function applyCriteria(Criteria $criteria, $builder);
 

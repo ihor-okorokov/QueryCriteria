@@ -3,6 +3,7 @@
 namespace IhorOk\QueryCriteria\Builders;
 
 use IhorOk\QueryCriteria\Criteria;
+use IhorOk\QueryCriteria\CriteriaScopes;
 use IhorOk\QueryCriteria\Helpers\HasCriteriaSelector;
 use IhorOk\QueryCriteria\Helpers\HasDynamoDb;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
@@ -78,9 +79,9 @@ abstract class HttpCriteriaBuilder implements CriteriaBuilder {
 	/**
 	 * Returns builder by applies criteria.
 	 *
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function compose($builder) {
 		$criteriaList = $this->preFilterCriteriaList($this->criteriaList());
@@ -95,9 +96,9 @@ abstract class HttpCriteriaBuilder implements CriteriaBuilder {
 	 * Returns builder by applied single criteria.
 	 *
 	 * @param  Criteria $criteria
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function applyCriteria(Criteria $criteria, $builder) {
 		return $criteria->apply($builder);
