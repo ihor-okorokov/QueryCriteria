@@ -23,16 +23,16 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	/**
 	 * General criteria list.
 	 *
-	 * @var Collection
+	 * @var Collection|null
 	 */
-	protected Collection $generalCriteriaList;
+	protected Collection|null $generalCriteriaList = null;
 
 	/**
 	 * Criteria list for DynamoDb strategy.
 	 *
-	 * @var Collection
+	 * @var Collection|null
 	 */
-	protected Collection $dynamoDbCriteriaList;
+	protected Collection|null $dynamoDbCriteriaList = null;
 
 	/**
 	 * StackCriteriaBuilder constructor.
@@ -123,14 +123,14 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return array
 	 */
 	public function criteriaList(): array {
-		return $this->generalCriteriaList->all();
+		return $this->generalCriteriaList?->all() ?? [];
 	}
 
 	/**
 	 * @return array
 	 */
 	public function dynamoDbCriteriaList(): array {
-		return $this->dynamoDbCriteriaList->all();
+		return $this->dynamoDbCriteriaList?->all() ?? [];
 	}
 
 	/**
@@ -153,6 +153,14 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return Collection
 	 */
 	protected function resolveCriteriaCollection(): Collection {
-		return $this->useDynamoDb ? $this->dynamoDbCriteriaList : $this->generalCriteriaList;
+		$collection = $this->useDynamoDb ? $this->dynamoDbCriteriaList : $this->generalCriteriaList;
+
+		if($collection instanceof Collection)
+			return $collection;
+
+		if($this->useDynamoDb)
+			return $this->dynamoDbCriteriaList = collect();
+
+		return $this->generalCriteriaList = collect();
 	}
 }
