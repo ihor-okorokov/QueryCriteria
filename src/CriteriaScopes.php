@@ -2,16 +2,17 @@
 
 namespace IhorOk\QueryCriteria;
 
+use BaoPham\DynamoDb\DynamoDbQueryBuilder;
 use IhorOk\QueryCriteria\Builders\StackCriteriaBuilder;
 use IhorOk\QueryCriteria\CriteriaBuilder as CriteriaBuilderContract;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method Builder|static queryCriteriaBuilder(CriteriaBuilderContract $criteriaBuilder)
- * @method static Builder|static queryCriteriaBuilder(CriteriaBuilderContract $criteriaBuilder)
+ * @method Builder|DynamoDbQueryBuilder|static queryCriteriaBuilder(CriteriaBuilderContract $criteriaBuilder)
+ * @method static Builder|DynamoDbQueryBuilder|static queryCriteriaBuilder(CriteriaBuilderContract $criteriaBuilder)
  *
- * @method Builder|static queryCriteria(Criteria... $list)
- * @method static Builder|static queryCriteria(Criteria... $list)
+ * @method Builder|DynamoDbQueryBuilder|static queryCriteria(Criteria... $list)
+ * @method static Builder|DynamoDbQueryBuilder|static queryCriteria(Criteria... $list)
  *
  * @method CriteriaSelector criteriaBuilder(CriteriaBuilderContract $criteriaBuilder)
  * @method static CriteriaSelector criteriaBuilder(CriteriaBuilderContract $criteriaBuilder)
