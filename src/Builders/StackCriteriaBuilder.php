@@ -13,7 +13,7 @@ use IhorOk\QueryCriteria\Helpers\HasUnion;
 use Illuminate\Support\Collection;
 
 /**
- * Criteria builder with collection of this criteria. Use Laravel's Collection for store this criteria.
+ * Criteria Builder with collection of these criteria. Using Laravel's Collection for store these criteria.
  *
  * @package IhorOk\QueryCriteria\Builders
  */
@@ -21,42 +21,51 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	use HasUnion, HasDynamoDb, HasCriteriaSelector;
 
 	/**
-	 * Store for criteria.
+	 * General criteria list.
 	 *
 	 * @var Collection
 	 */
-	private Collection $collection;
+	protected Collection $generalCriteriaList;
 
 	/**
-	 * CriteriaCollection constructor.
+	 * Criteria list for DynamoDb strategy.
 	 *
-	 * @param  Criteria[] $criteriaList
+	 * @var Collection
+	 */
+	protected Collection $dynamoDbCriteriaList;
+
+	/**
+	 * StackCriteriaBuilder constructor.
+	 *
+	 * @param  Criteria[] $generalCriteriaList
+	 * @param  Criteria[] $dynamoDbCriteriaList
 	 *
 	 * @return void
 	 */
-	public function __construct(array $criteriaList) {
-		$this->init($criteriaList);
+	public function __construct(array $generalCriteriaList, array $dynamoDbCriteriaList = []) {
+		$this->generalCriteriaList = $this->init($generalCriteriaList);
+		$this->dynamoDbCriteriaList = $this->init($dynamoDbCriteriaList);
 	}
 
 	/**
-	 * @param  array $criteriaList
+	 * @param  Criteria[] $generalCriteriaList
+	 * @param  Criteria[] $dynamoDbCriteriaList
 	 *
 	 * @return static
 	 */
-	public static function create(array $criteriaList) {
-		return new static($criteriaList);
+	public static function create(array $generalCriteriaList, array $dynamoDbCriteriaList = []) {
+		return new static($generalCriteriaList, $dynamoDbCriteriaList);
 	}
 
 	/**
 	 * @param  array $criteriaList
 	 *
-	 * @return StackCriteriaBuilder
+	 * @return Collection
 	 */
-	public function init(array $criteriaList): self {
-		$this->collection = new Collection($this->preFilterCriteriaList($criteriaList));
-		$this->collection = $this->collection->keyBy(fn($criteria) => get_class($criteria));
+	public function init(array $criteriaList): Collection {
+		$collection = new Collection($this->preFilterCriteriaList($criteriaList));
 
-		return $this;
+		return $collection->keyBy(fn($criteria) => get_class($criteria));
 	}
 
 	/**
@@ -67,7 +76,7 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function compose($builder) {
-		$criteriaList = $this->preFilterCriteriaList($this->criteriaList());
+		$criteriaList = $this->preFilterCriteriaList($this->resolveCriteriaList());
 
 		foreach ($criteriaList as $criteria)
 			$this->applyCriteria($criteria, $builder);
@@ -94,7 +103,7 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return static
 	 */
 	public function includeCriteria(Criteria $criteria, ?string $key = null): static {
-		$this->collection->offsetSet($key, $criteria);
+		$this->resolveCriteriaCollection()->offsetSet($key, $criteria);
 
 		return $this;
 	}
@@ -105,7 +114,7 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return static
 	 */
 	public function excludeCriteria(string $criteriaClassName): static {
-		$this->collection->except($criteriaClassName);
+		$this->resolveCriteriaCollection()->except($criteriaClassName);
 
 		return $this;
 	}
@@ -114,14 +123,21 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return array
 	 */
 	public function criteriaList(): array {
-		return $this->preFilterCriteriaList($this->collection->all());
+		return $this->generalCriteriaList->all();
+	}
+
+	/**
+	 * @return array
+	 */
+	public function dynamoDbCriteriaList(): array {
+		return $this->dynamoDbCriteriaList->all();
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function hasCriteriaList(): bool {
-		return !empty($this->preFilterCriteriaList($this->collection->all()));
+		return !empty($this->preFilterCriteriaList($this->resolveCriteriaCollection()->all()));
 	}
 
 	/**
@@ -131,5 +147,12 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 */
 	public function preFilterCriteriaList(array $criteriaList): array {
 		return array_filter($criteriaList, fn($criteria) => $criteria instanceof Criteria);
+	}
+
+	/**
+	 * @return Collection
+	 */
+	protected function resolveCriteriaCollection(): Collection {
+		return $this->useDynamoDb ? $this->dynamoDbCriteriaList : $this->generalCriteriaList;
 	}
 }

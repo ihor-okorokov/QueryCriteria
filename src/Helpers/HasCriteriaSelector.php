@@ -41,7 +41,7 @@ trait HasCriteriaSelector {
 	 * @return Collection
 	 */
 	public function fetchAll(bool $onlyWithCriteriaSet = false): Collection {
-		return $this->fetchWithCriteria(total: -1, onlyWithCriteriaSet: $onlyWithCriteriaSet);
+		return $this->fetch(total: -1, onlyWithCriteriaSet: $onlyWithCriteriaSet);
 	}
 
 	/**

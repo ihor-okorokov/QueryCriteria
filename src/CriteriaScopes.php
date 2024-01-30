@@ -19,6 +19,9 @@ use Illuminate\Database\Eloquent\Builder;
  * @method CriteriaSelector criteria(Criteria... $list)
  * @method static CriteriaSelector criteria(Criteria... $list)
  *
+ * @method CriteriaSelector dynamoDbCriteria(Criteria... $list)
+ * @method static CriteriaSelector dynamoDbCriteria(Criteria... $list)
+ *
  * @method Builder|static queryRootAlias(string $alias)
  * @method static Builder|static queryRootAlias(string $alias)
  *
@@ -74,6 +77,16 @@ trait CriteriaScopes {
 	 */
 	public function scopeCriteria($query, Criteria... $list): CriteriaSelector {
 		return StackCriteriaBuilder::create($list)->setQueryBuilder($query);
+	}
+
+	/**
+	 * @param  Builder $query
+	 * @param  Criteria ...$list
+	 *
+	 * @return CriteriaSelector
+	 */
+	public function scopeDynamoDbCriteria($query, Criteria... $list): CriteriaSelector {
+		return StackCriteriaBuilder::create([], $list)->useDynamoDb()->setQueryBuilder($query);
 	}
 
 	/**

@@ -84,7 +84,7 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
 	 */
 	public function compose($builder) {
-		$criteriaList = $this->preFilterCriteriaList($this->criteriaList());
+		$criteriaList = $this->preFilterCriteriaList($this->resolveCriteriaList());
 
 		foreach ($criteriaList as $filterParameter => $criteria)
 			$this->applyCriteria($criteria, $builder);
@@ -122,12 +122,12 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	/**
 	 * To store criteria that need to be dynamically excluded from the list.
 	 *
-	 * @param  string $criteria
+	 * @param  string $criteriaClassName
 	 *
 	 * @return static
 	 */
-	public function excludeCriteria(string $criteria): static {
-		$this->exceptCriteria[] = $criteria;
+	public function excludeCriteria(string $criteriaClassName): static {
+		$this->exceptCriteria[] = $criteriaClassName;
 
 		return $this;
 	}
@@ -138,7 +138,7 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	 * @return bool
 	 */
 	public function hasCriteriaList(): bool {
-		return !empty($this->preFilterCriteriaList($this->criteriaList()));
+		return !empty($this->preFilterCriteriaList($this->resolveCriteriaList()));
 	}
 
 	/**

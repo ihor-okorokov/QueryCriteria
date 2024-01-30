@@ -12,7 +12,7 @@ interface CriteriaSelector {
 	/**
 	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function setQueryBuilder($builder): static;
 
