@@ -2,6 +2,7 @@
 
 namespace IhorOk\QueryCriteria\Builders;
 
+use BaoPham\DynamoDb\DynamoDbQueryBuilder;
 use IhorOk\QueryCriteria\Criteria;
 use IhorOk\QueryCriteria\CriteriaScopes;
 use IhorOk\QueryCriteria\Helpers\HasCriteriaSelector;
@@ -79,9 +80,9 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	/**
 	 * Returns builder by applies criteria.
 	 *
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes
 	 */
 	public function compose($builder) {
 		$criteriaList = $this->preFilterCriteriaList($this->resolveCriteriaList());
@@ -96,9 +97,9 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	 * Returns builder by applied single criteria.
 	 *
 	 * @param  Criteria $criteria
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes
 	 */
 	public function applyCriteria(Criteria $criteria, $builder) {
 		return $criteria->apply($builder);

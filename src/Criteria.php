@@ -2,6 +2,7 @@
 
 namespace IhorOk\QueryCriteria;
 
+use BaoPham\DynamoDb\DynamoDbQueryBuilder;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
@@ -14,9 +15,9 @@ interface Criteria {
 	/**
 	 * Apply criteria conditions to query builder.
 	 *
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes
 	 */
 	public function apply($builder);
 }

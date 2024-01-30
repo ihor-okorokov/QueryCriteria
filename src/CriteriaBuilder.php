@@ -2,6 +2,7 @@
 
 namespace IhorOk\QueryCriteria;
 
+use BaoPham\DynamoDb\DynamoDbQueryBuilder;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
@@ -22,9 +23,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	/**
 	 * Returns builder by applies criteria.
 	 *
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes
 	 */
 	public function compose($builder);
 
@@ -32,9 +33,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	 * Returns builder by applied single criteria.
 	 *
 	 * @param  Criteria $criteria
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes $builder
 	 *
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes
 	 */
 	public function applyCriteria(Criteria $criteria, $builder);
 

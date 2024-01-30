@@ -2,6 +2,7 @@
 
 namespace IhorOk\QueryCriteria\Helpers;
 
+use BaoPham\DynamoDb\DynamoDbQueryBuilder;
 use IhorOk\QueryCriteria\Criteria\Limit;
 use IhorOk\QueryCriteria\Criteria\Take;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginatorContract;
@@ -13,12 +14,12 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 trait HasCriteriaSelector {
 	/**
-	 * @var IlluminateEloquentBuilder|IlluminateQueryBuilder|null
+	 * @var IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|null
 	 */
 	protected $queryBuilder = null;
 
 	/**
-	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
+	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder $builder
 	 *
 	 * @return $this
 	 */
@@ -29,7 +30,7 @@ trait HasCriteriaSelector {
 	}
 
 	/**
-	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|null
+	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|null
 	 */
 	public function getQueryBuilder() {
 		return $this->queryBuilder;
