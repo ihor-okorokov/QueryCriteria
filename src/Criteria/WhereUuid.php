@@ -2,7 +2,7 @@
 
 namespace IhorOk\QueryCriteria\Criteria;
 
-class WhereUUID extends Where {
+class WhereUuid extends Where {
 	/**
 	 * @var string
 	 */

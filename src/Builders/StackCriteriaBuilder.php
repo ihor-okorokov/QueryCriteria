@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
  *
  * @package IhorOk\QueryCriteria\Builders
  */
-class CriteriaCollection implements CriteriaBuilder {
+class StackCriteriaBuilder implements CriteriaBuilder {
 	use HasUnion, HasDynamoDb, HasCriteriaSelector;
 
 	/**
@@ -50,7 +50,7 @@ class CriteriaCollection implements CriteriaBuilder {
 	/**
 	 * @param  array $criteriaList
 	 *
-	 * @return CriteriaCollection
+	 * @return StackCriteriaBuilder
 	 */
 	public function init(array $criteriaList): self {
 		$this->collection = new Collection($this->preFilterCriteriaList($criteriaList));

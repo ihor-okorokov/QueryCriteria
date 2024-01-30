@@ -40,7 +40,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return Collection
 	 */
-	public function fetchAllWithCriteria(bool $onlyWithCriteriaSet = false): Collection {
+	public function fetchAll(bool $onlyWithCriteriaSet = false): Collection {
 		return $this->fetchWithCriteria(total: -1, onlyWithCriteriaSet: $onlyWithCriteriaSet);
 	}
 
@@ -51,7 +51,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return Collection
 	 */
-	public function fetchWithCriteria(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): Collection {
+	public function fetch(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): Collection {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList())) return new Collection();
 
 		return $this
@@ -68,7 +68,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return LengthAwarePaginatorContract
 	 */
-	public function paginateWithCriteria(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): LengthAwarePaginatorContract {
+	public function paginate(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): LengthAwarePaginatorContract {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
 			return new LengthAwarePaginator(new Collection(), 0, $total);
 
@@ -81,7 +81,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return Model|null
 	 */
-	public function firstWithCriteria(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): Model|null {
+	public function first(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): Model|null {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
 			return null;
 
@@ -95,7 +95,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return int
 	 */
-	public function countWithCriteria(bool $onlyWithCriteriaSet = false): int {
+	public function count(bool $onlyWithCriteriaSet = false): int {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
 			return 0;
 
@@ -107,7 +107,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return bool
 	 */
-	public function existsWithCriteria(bool $onlyWithCriteriaSet = false): bool {
+	public function exists(bool $onlyWithCriteriaSet = false): bool {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
 			return false;
 
@@ -121,7 +121,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return void
 	 */
-	public function chunkWithCriteria(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void {
+	public function chunk(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
 			return;
 
@@ -135,7 +135,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return void
 	 */
-	public function eachWithCriteria(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void {
+	public function each(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList()))
 			return;
 

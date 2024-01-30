@@ -18,7 +18,7 @@ use Illuminate\Support\Arr;
  *
  * @package IhorOk\QueryCriteria\Builders
  */
-abstract class HttpCriteriaBuilder implements CriteriaBuilder {
+abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	use HasUnion, HasDynamoDb, HasCriteriaSelector;
 
 	/**

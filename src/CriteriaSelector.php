@@ -26,7 +26,7 @@ interface CriteriaSelector {
 	 *
 	 * @return Collection
 	 */
-	public function fetchAllWithCriteria(bool $onlyWithCriteriaSet = false): Collection;
+	public function fetchAll(bool $onlyWithCriteriaSet = false): Collection;
 
 	/**
 	 * @param  int $total
@@ -35,7 +35,7 @@ interface CriteriaSelector {
 	 *
 	 * @return Collection
 	 */
-	public function fetchWithCriteria(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): Collection;
+	public function fetch(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): Collection;
 
 	/**
 	 * @param  int $total
@@ -44,7 +44,7 @@ interface CriteriaSelector {
 	 *
 	 * @return LengthAwarePaginatorContract
 	 */
-	public function paginateWithCriteria(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): LengthAwarePaginatorContract;
+	public function paginate(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): LengthAwarePaginatorContract;
 
 	/**
 	 * @param  bool $onlyWithCriteriaSet
@@ -52,21 +52,21 @@ interface CriteriaSelector {
 	 *
 	 * @return Model|null
 	 */
-	public function firstWithCriteria(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): Model|null;
+	public function first(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): Model|null;
 
 	/**
 	 * @param  bool $onlyWithCriteriaSet
 	 *
 	 * @return int
 	 */
-	public function countWithCriteria(bool $onlyWithCriteriaSet = false): int;
+	public function count(bool $onlyWithCriteriaSet = false): int;
 
 	/**
 	 * @param  bool $onlyWithCriteriaSet
 	 *
 	 * @return bool
 	 */
-	public function existsWithCriteria(bool $onlyWithCriteriaSet = false): bool;
+	public function exists(bool $onlyWithCriteriaSet = false): bool;
 
 	/**
 	 * @param  callable $callback
@@ -75,7 +75,7 @@ interface CriteriaSelector {
 	 *
 	 * @return void
 	 */
-	public function chunkWithCriteria(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void;
+	public function chunk(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void;
 
 	/**
 	 * @param  callable $callback
@@ -84,5 +84,5 @@ interface CriteriaSelector {
 	 *
 	 * @return void
 	 */
-	public function eachWithCriteria(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void;
+	public function each(callable $callback, int $total = 1000, bool $onlyWithCriteriaSet = false): void;
 }

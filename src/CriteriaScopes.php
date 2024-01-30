@@ -2,7 +2,7 @@
 
 namespace IhorOk\QueryCriteria;
 
-use IhorOk\QueryCriteria\Builders\CriteriaCollection;
+use IhorOk\QueryCriteria\Builders\StackCriteriaBuilder;
 use IhorOk\QueryCriteria\CriteriaBuilder as CriteriaBuilderContract;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -73,7 +73,7 @@ trait CriteriaScopes {
 	 * @return CriteriaSelector
 	 */
 	public function scopeCriteria($query, Criteria... $list): CriteriaSelector {
-		return CriteriaCollection::create($list)->setQueryBuilder($query);
+		return StackCriteriaBuilder::create($list)->setQueryBuilder($query);
 	}
 
 	/**
