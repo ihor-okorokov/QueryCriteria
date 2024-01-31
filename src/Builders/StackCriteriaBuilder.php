@@ -77,7 +77,7 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|CriteriaScopes
 	 */
 	public function compose($builder) {
-		$criteriaList = $this->preFilterCriteriaList($this->resolveCriteriaList());
+		$criteriaList = $this->preFilterCriteriaList($this->resolveCriteriaCollection()->all());
 
 		foreach ($criteriaList as $criteria)
 			$this->applyCriteria($criteria, $builder);
@@ -124,14 +124,14 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return array
 	 */
 	public function criteriaList(): array {
-		return $this->generalCriteriaList?->all() ?? [];
+		return [];
 	}
 
 	/**
 	 * @return array
 	 */
 	public function dynamoDbCriteriaList(): array {
-		return $this->dynamoDbCriteriaList?->all() ?? [];
+		return [];
 	}
 
 	/**
@@ -154,14 +154,18 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return Collection
 	 */
 	protected function resolveCriteriaCollection(): Collection {
-		$collection = $this->useDynamoDb ? $this->dynamoDbCriteriaList : $this->generalCriteriaList;
+		$resolveCollection = function(): Collection {
+			$collection = $this->useDynamoDb ? $this->dynamoDbCriteriaList : $this->generalCriteriaList;
 
-		if($collection instanceof Collection)
-			return $collection;
+			if($collection instanceof Collection)
+				return $collection;
 
-		if($this->useDynamoDb)
-			return $this->dynamoDbCriteriaList = collect();
+			if($this->useDynamoDb)
+				return $this->dynamoDbCriteriaList = collect();
 
-		return $this->generalCriteriaList = collect();
+			return $this->generalCriteriaList = collect();
+		};
+
+		return $resolveCollection()->merge($this->resolveCriteriaList());
 	}
 }
