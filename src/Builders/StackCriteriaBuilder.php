@@ -43,7 +43,7 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 *
 	 * @return void
 	 */
-	public function __construct(array $generalCriteriaList, array $dynamoDbCriteriaList = []) {
+	public function __construct(array $generalCriteriaList = [], array $dynamoDbCriteriaList = []) {
 		$this->generalCriteriaList = $this->init($generalCriteriaList);
 		$this->dynamoDbCriteriaList = $this->init($dynamoDbCriteriaList);
 	}
