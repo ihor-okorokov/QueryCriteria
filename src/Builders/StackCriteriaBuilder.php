@@ -166,6 +166,6 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 			return $this->generalCriteriaList = collect();
 		};
 
-		return $resolveCollection()->merge($this->resolveCriteriaList());
+		return $resolveCollection()->push(...$this->resolveCriteriaList());
 	}
 }
