@@ -1,7 +1,7 @@
 {
     "name": "ihor-ok/query-criteria",
     "description": "Query criteria scopes by OOP.",
-    "version": "1.2.8",
+    "version": "1.2.9",
     "type": "library",
     "require": {
         "php": "^8.2",
