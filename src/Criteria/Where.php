@@ -92,7 +92,7 @@ class Where implements Criteria {
 		} else {
 			$id = Arr::first($this->values);
 
-			if($this->values)
+			if($this->equals)
 				$builder->where($this->resolveColumn($builder), $id);
 			else
 				$builder->where($this->resolveColumn($builder), '<>', $id);
