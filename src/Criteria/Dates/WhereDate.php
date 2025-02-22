@@ -1,6 +1,6 @@
 <?php
 
-namespace IhorOkorokov\QueryCriteria\Criteria\Dates;
+namespace IhorOk\QueryCriteria\Criteria\Dates;
 
 use IhorOk\QueryCriteria\Criteria;
 use IhorOk\QueryCriteria\CriteriaScopes;
