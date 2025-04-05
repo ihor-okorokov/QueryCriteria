@@ -11,12 +11,12 @@ class FullTextCriteria implements Criteria {
 	/**
 	 * @var string
 	 */
-	protected string $column;
+	protected $column;
 
 	/**
 	 * @var string|null
 	 */
-	protected ?string $text;
+	protected $text;
 
 	/**
 	 * FullTextCriteria constructor.

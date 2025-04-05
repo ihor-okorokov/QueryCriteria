@@ -19,22 +19,22 @@ class TimeInterval implements Criteria {
 	/**
 	 * @var int
 	 */
-	protected int $interval;
+	protected $interval;
 
 	/**
 	 * @var string
 	 */
-	protected string $timeFrame;
+	protected $timeFrame;
 
 	/**
 	 * @var string
 	 */
-	protected string $column;
+	protected $column;
 
 	/**
 	 * @var string
 	 */
-	protected string $operator;
+	protected $operator;
 
 	/**
 	 * @param  int $interval

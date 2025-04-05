@@ -12,17 +12,17 @@ class Where implements Criteria {
 	/**
 	 * @var array $values
 	 */
-	public array $values;
+	public $values;
 
 	/**
 	 * @var string
 	 */
-	protected string $column = 'id';
+	protected $column = 'id';
 
 	/**
 	 * @var bool
 	 */
-	protected bool $equals = true;
+	protected $equals = true;
 
 	/**
 	 * Where constructor.

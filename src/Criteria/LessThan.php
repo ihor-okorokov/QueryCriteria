@@ -11,24 +11,24 @@ class LessThan implements Criteria {
 	/**
 	 * @var mixed
 	 */
-	protected mixed $value;
+	protected $value;
 
 	/**
 	 * @var string
 	 */
-	protected string $column = 'id';
+	protected $column = 'id';
 
 	/**
 	 * @var bool
 	 */
-	protected bool $andEqual = false;
+	protected $andEqual = false;
 
 	/**
 	 * @param  mixed $value
 	 * @param  string|null $column
 	 * @param  bool $andEqual
 	 */
-	public function __construct(mixed $value, string|null $column = null, bool $andEqual = false) {
+	public function __construct($value, ?string $column = null, bool $andEqual = false) {
 		$this->value = $value;
 		$this->column = $column;
 		$this->andEqual = $andEqual;

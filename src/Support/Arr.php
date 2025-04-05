@@ -12,6 +12,8 @@ class Arr extends IlluminateSupportArr {
 	 * @return array
 	 */
 	public static function withoutEmpty(array $array, bool $useCoreEmptyFunction = false): array {
-		return static::where($array, fn($value) => !Str::isEmpty($value, $useCoreEmptyFunction));
+		return static::where($array, function($value) use ($useCoreEmptyFunction) {
+			return !Str::isEmpty($value, $useCoreEmptyFunction);
+		});
 	}
 }

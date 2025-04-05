@@ -10,9 +10,16 @@ use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
 
 class GroupBy implements Criteria {
 	/**
+	 * @var array
+	 */
+	protected $groups;
+
+	/**
 	 * @param  array $groups
 	 */
-	public function __construct(protected array $groups) { }
+	public function __construct(array $groups) {
+		$this->groups = $groups;
+	}
 
 	/**
 	 * @param  DynamoDbQueryBuilder|CriteriaScopes|IlluminateEloquentBuilder|IlluminateQueryBuilder $builder

@@ -17,14 +17,14 @@ trait HasJoins {
 	 *
 	 * @var array
 	 */
-	protected array $excludedJoins = [];
+	protected $excludedJoins = [];
 
 	/**
 	 * Tables names for join to query builder.
 	 *
 	 * @var array
 	 */
-	protected array $includedJoins = [];
+	protected $includedJoins = [];
 
 	/**
 	 * Array with keys of tables names and their callbacks where apply join to query builder.

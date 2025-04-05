@@ -11,7 +11,7 @@ class Limit implements Criteria {
 	/**
 	 * @var int
 	 */
-	protected int $limit;
+	protected $limit;
 
 	/**
 	 * Limit constructor.

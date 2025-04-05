@@ -11,12 +11,12 @@ class Sort implements Criteria {
 	/**
 	 * @var string|null
 	 */
-	protected ?string $column = 'created_at';
+	protected $column = 'created_at';
 
 	/**
 	 * @var string|null
 	 */
-	protected ?string $direction = 'asc';
+	protected $direction = 'asc';
 
 	/**
 	 * Sort constructor.
@@ -43,7 +43,9 @@ class Sort implements Criteria {
 			!empty($this->column),
 
 			/* @var IlluminateEloquentBuilder|IlluminateQueryBuilder|CriteriaScopes $query */
-			fn($query) => $query->orderBy($query->queryColumn($this->column), $this->direction)
+			function($query) {
+				return $query->orderBy($query->queryColumn($this->column), $this->direction);
+			}
 		);
 	}
 }

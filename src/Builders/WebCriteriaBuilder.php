@@ -25,21 +25,21 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	/**
 	 * @var Request|null
 	 */
-	protected ?Request $request;
+	protected $request;
 
 	/**
 	 * List of criteria to be included to the list.
 	 *
 	 * @var string[]
 	 */
-	protected array $includedCriteria = [];
+	protected $includedCriteria = [];
 
 	/**
 	 * List of criteria to be excluded from the list.
 	 *
 	 * @var string[]
 	 */
-	protected array $exceptCriteria = [];
+	protected $exceptCriteria = [];
 
 	/**
 	 * BaseCriteriaBuilder constructor.
@@ -71,7 +71,7 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	}
 
 	/**
-	 * @return static
+	 * @return self
 	 */
 	public function clone() {
 		return clone $this;
@@ -109,9 +109,9 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	 * @param  Criteria $criteria
 	 * @param  string|null $key
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function includeCriteria(Criteria $criteria, ?string $key = null): static {
+	public function includeCriteria(Criteria $criteria, ?string $key = null): self {
 		if (is_null($key))
 			$this->includedCriteria[] = $criteria;
 		else
@@ -125,9 +125,9 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	 *
 	 * @param  string $criteriaClassName
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function excludeCriteria(string $criteriaClassName): static {
+	public function excludeCriteria(string $criteriaClassName): self {
 		$this->exceptCriteria[] = $criteriaClassName;
 
 		return $this;
@@ -154,17 +154,25 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	 */
 	public function preFilterCriteriaList(array $criteriaList): array {
 		// exclude empty criteria
-		$criteriaList = array_filter($criteriaList, fn($item) => !empty($item));
+		$criteriaList = array_filter($criteriaList, function($item) {
+			return !empty($item);
+		});
 
 		// exclude no need criteria from list by classes names
-		$criteriaList = array_filter($criteriaList, fn($criteria) => !in_array(get_class($criteria), $this->exceptCriteria));
+		$criteriaList = array_filter($criteriaList, function($criteria) {
+			return !in_array(get_class($criteria), $this->exceptCriteria);
+		});
 
 		// include criteria to list
 		$criteriaList = array_merge($criteriaList, $this->includedCriteria);
 
-		$defaultCriteriaList = array_filter($criteriaList, fn($key) => is_numeric($key), ARRAY_FILTER_USE_KEY);
+		$defaultCriteriaList = array_filter($criteriaList, function($key) {
+			return is_numeric($key);
+		}, ARRAY_FILTER_USE_KEY);
 
-		$namedCriteriaList = array_filter($criteriaList, fn($key) => is_string($key), ARRAY_FILTER_USE_KEY);
+		$namedCriteriaList = array_filter($criteriaList, function($key) {
+			return is_string($key);
+		}, ARRAY_FILTER_USE_KEY);
 
 		$usedCriteriaListByRequest = Arr::only($criteriaList, array_keys($this->request->only(array_keys($namedCriteriaList))));
 

@@ -11,7 +11,7 @@ class RootAlias implements Criteria {
 	/**
 	 * @var string
 	 */
-	protected string $alias;
+	protected $alias;
 
 	/**
 	 * RootAlias constructor.

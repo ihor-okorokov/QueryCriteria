@@ -3,7 +3,6 @@
 namespace IhorOk\QueryCriteria;
 
 use BaoPham\DynamoDb\DynamoDbQueryBuilder;
-use Illuminate\Contracts\Pagination\CursorPaginator as CursorPaginatorContract;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginatorContract;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,9 +13,9 @@ interface CriteriaSelector {
 	/**
 	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder $builder
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function setQueryBuilder($builder): static;
+	public function setQueryBuilder($builder): self;
 
 	/**
 	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|null
@@ -49,21 +48,12 @@ interface CriteriaSelector {
 	public function paginate(int $total, int $page = 1, bool $onlyWithCriteriaSet = false): LengthAwarePaginatorContract;
 
 	/**
-	 * @param  int $total
-	 * @param  string|null $cursor
-	 * @param  bool $onlyWithCriteriaSet
-	 *
-	 * @return CursorPaginatorContract
-	 */
-	public function cursorPaginate(int $total, string|null $cursor = null, bool $onlyWithCriteriaSet = false): CursorPaginatorContract;
-
-	/**
 	 * @param  bool $onlyWithCriteriaSet
 	 * @param  bool $throwFailCase
 	 *
 	 * @return Model|null
 	 */
-	public function first(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): Model|null;
+	public function first(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): ?Model;
 
 	/**
 	 * @param  bool $onlyWithCriteriaSet

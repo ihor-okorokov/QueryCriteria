@@ -5,13 +5,11 @@ namespace IhorOk\QueryCriteria\Helpers;
 use BaoPham\DynamoDb\DynamoDbQueryBuilder;
 use IhorOk\QueryCriteria\Criteria\Limit;
 use IhorOk\QueryCriteria\Criteria\Take;
-use Illuminate\Contracts\Pagination\CursorPaginator as CursorPaginatorContract;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginatorContract;
 use Illuminate\Database\Eloquent\Builder as IlluminateEloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as IlluminateQueryBuilder;
-use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 trait HasCriteriaSelector {
@@ -25,7 +23,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return $this
 	 */
-	public function setQueryBuilder($builder): static {
+	public function setQueryBuilder($builder): self {
 		$this->queryBuilder = $builder;
 
 		return $this;
@@ -44,7 +42,7 @@ trait HasCriteriaSelector {
 	 * @return Collection
 	 */
 	public function fetchAll(bool $onlyWithCriteriaSet = false): Collection {
-		return $this->fetch(total: -1, onlyWithCriteriaSet: $onlyWithCriteriaSet);
+		return $this->fetch(-1, 1, $onlyWithCriteriaSet);
 	}
 
 	/**
@@ -78,22 +76,7 @@ trait HasCriteriaSelector {
 			return new LengthAwarePaginator(new Collection(), 0, $total);
 		}
 
-		return $this->compose($this->queryBuilder)->paginate(perPage: $total, page: $page);
-	}
-
-	/**
-	 * @param  int $total
-	 * @param  string|null $cursor
-	 * @param  bool $onlyWithCriteriaSet
-	 *
-	 * @return CursorPaginatorContract
-	 */
-	public function cursorPaginate(int $total, string|null $cursor = null, bool $onlyWithCriteriaSet = false): CursorPaginatorContract {
-		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList())) {
-			return new CursorPaginator(new Collection(), $total, $cursor);
-		}
-
-		return $this->compose($this->queryBuilder)->cursorPaginate(perPage: $total, cursor: $cursor);
+		return $this->compose($this->queryBuilder)->paginate($total, ['*'], 'page', $page);
 	}
 
 	/**
@@ -102,7 +85,7 @@ trait HasCriteriaSelector {
 	 *
 	 * @return Model|null
 	 */
-	public function first(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): Model|null {
+	public function first(bool $onlyWithCriteriaSet = false, bool $throwFailCase = false): ?Model {
 		if(!$this->queryBuilder || ($onlyWithCriteriaSet && !$this->hasCriteriaList())) {
 			return null;
 		}

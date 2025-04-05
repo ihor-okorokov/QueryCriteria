@@ -8,5 +8,5 @@ class FromDate extends GreaterThan {
 	/**
 	 * @var string
 	 */
-	protected string $column = 'created_at';
+	protected $column = 'created_at';
 }

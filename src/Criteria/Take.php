@@ -11,12 +11,12 @@ class Take implements Criteria {
 	/**
 	 * @var int
 	 */
-	protected int $total;
+	protected $total;
 
 	/**
 	 * @var int
 	 */
-	protected int $page;
+	protected $page;
 
 	/**
 	 * Take constructor.

@@ -6,5 +6,5 @@ class WhereUuid extends Where {
 	/**
 	 * @var string
 	 */
-	protected string $column = 'uuid';
+	protected $column = 'uuid';
 }

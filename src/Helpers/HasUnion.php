@@ -11,7 +11,7 @@ trait HasUnion {
 	/**
 	 * @var array
 	 */
-	protected array $unions = [];
+	protected $unions = [];
 
 	/**
 	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder $builder
@@ -41,9 +41,9 @@ trait HasUnion {
 	 * @param  CriteriaBuilder $criteriaBuilder
 	 * @param  bool $all
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function union(CriteriaBuilder $criteriaBuilder, bool $all = true): static {
+	public function union(CriteriaBuilder $criteriaBuilder, bool $all = true): self {
 		$this->unions[] = ['builder' => $criteriaBuilder, 'all' => $all];
 
 		return $this;

@@ -26,14 +26,14 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 *
 	 * @var Collection|null
 	 */
-	protected Collection|null $generalCriteriaList = null;
+	protected ?Collection $generalCriteriaList = null;
 
 	/**
 	 * Criteria list for DynamoDb strategy.
 	 *
 	 * @var Collection|null
 	 */
-	protected Collection|null $dynamoDbCriteriaList = null;
+	protected ?Collection $dynamoDbCriteriaList = null;
 
 	/**
 	 * StackCriteriaBuilder constructor.
@@ -66,7 +66,9 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	public function init(array $criteriaList): Collection {
 		$collection = new Collection($this->preFilterCriteriaList($criteriaList));
 
-		return $collection->keyBy(fn($criteria) => get_class($criteria));
+		return $collection->keyBy(function($criteria) {
+			return get_class($criteria);
+		});
 	}
 
 	/**
@@ -101,9 +103,9 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @param  Criteria $criteria
 	 * @param  string|null $key
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function includeCriteria(Criteria $criteria, ?string $key = null): static {
+	public function includeCriteria(Criteria $criteria, ?string $key = null): self {
 		$this->resolveCriteriaCollection()->offsetSet($key, $criteria);
 
 		return $this;
@@ -112,9 +114,9 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	/**
 	 * @param  string $criteriaClassName
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function excludeCriteria(string $criteriaClassName): static {
+	public function excludeCriteria(string $criteriaClassName): self {
 		$this->resolveCriteriaCollection()->except($criteriaClassName);
 
 		return $this;
@@ -147,7 +149,9 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 * @return array
 	 */
 	public function preFilterCriteriaList(array $criteriaList): array {
-		return array_filter($criteriaList, fn($criteria) => $criteria instanceof Criteria);
+		return array_filter($criteriaList, function($criteria) {
+			return $criteria instanceof Criteria;
+		});
 	}
 
 	/**

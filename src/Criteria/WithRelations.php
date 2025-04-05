@@ -11,7 +11,7 @@ class WithRelations implements Criteria {
 	/**
 	 * @var array
 	 */
-	public array $relations = [];
+	public $relations = [];
 
 	/**
 	 * WithRelations constructor.

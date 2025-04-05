@@ -14,12 +14,12 @@ class ChainCriteria implements Criteria {
 	/**
 	 * @var Criteria ...$criteria
 	 */
-	protected array $list;
+	protected $list;
 
 	/**
 	 * @var bool
 	 */
-	protected bool $isNestedWhere = true;
+	protected $isNestedWhere = true;
 
 	/**
 	 * Chain constructor.

@@ -12,7 +12,7 @@ class GroupCriteria implements Criteria {
 	/**
 	 * @var array
 	 */
-	protected array $criteriaList;
+	protected $criteriaList;
 
 	/**
 	 * @param  array $criteriaList

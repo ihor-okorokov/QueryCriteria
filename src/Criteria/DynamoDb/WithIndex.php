@@ -12,7 +12,7 @@ class WithIndex implements Criteria {
 	/**
 	 * @var string
 	 */
-	protected string $index;
+	protected $index;
 
 	/**
 	 * @param  string $index

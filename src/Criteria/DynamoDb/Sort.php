@@ -13,7 +13,7 @@ class Sort implements Criteria {
 	/**
 	 * @var string
 	 */
-	protected string $strategy;
+	protected $strategy;
 
 	/**
 	 * @param  string $strategy

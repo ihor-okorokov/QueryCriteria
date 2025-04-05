@@ -16,9 +16,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	 * @param  CriteriaBuilder $criteriaBuilder
 	 * @param  bool $all
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function union(self $criteriaBuilder, bool $all = true): static;
+	public function union(self $criteriaBuilder, bool $all = true): self;
 
 	/**
 	 * Returns builder by applies criteria.
@@ -45,18 +45,18 @@ interface CriteriaBuilder extends CriteriaSelector {
 	 * @param  Criteria $criteria
 	 * @param  string|null $key
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function includeCriteria(Criteria $criteria, ?string $key = null): static;
+	public function includeCriteria(Criteria $criteria, ?string $key = null): self;
 
 	/**
 	 * Exclude criteria from the list.
 	 *
 	 * @param  string $criteriaClassName class name of class implements Criteria
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function excludeCriteria(string $criteriaClassName): static;
+	public function excludeCriteria(string $criteriaClassName): self;
 
 	/**
 	 * Returns a list of possible search criteria.
@@ -73,9 +73,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	/**
 	 * @param  bool $enable
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function useDynamoDb(bool $enable = true): static;
+	public function useDynamoDb(bool $enable = true): self;
 
 	/**
 	 * @return bool

@@ -12,12 +12,12 @@ class SelectAll implements Criteria {
 	/**
 	 * @var array
 	 */
-	protected array $columns;
+	protected $columns;
 
 	/**
 	 * @var bool
 	 */
-	protected bool $withRootAlias;
+	protected $withRootAlias;
 
 	/**
 	 * SelectAll constructor.
@@ -37,8 +37,9 @@ class SelectAll implements Criteria {
 	 */
 	protected function mapColumns($builder): array {
 		return array_map(
-			fn($column) => $this->withRootAlias && !($column instanceof Expression) ? $builder->queryColumn($column) : $column,
-
+			function($column) use ($builder) {
+				return $this->withRootAlias && !($column instanceof Expression) ? $builder->queryColumn($column) : $column;
+			},
 			($this->columns ?: ['*'])
 		);
 	}

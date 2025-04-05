@@ -15,7 +15,7 @@ class OrCriteria implements Criteria {
 	/**
 	 * @var Criteria[]
 	 */
-	protected array $criteriaList;
+	protected $criteriaList;
 
 	/**
 	 * OrCriteria constructor.
@@ -43,7 +43,9 @@ class OrCriteria implements Criteria {
 		return $builder->where(function ($builder) {
 			/* @var IlluminateEloquentBuilder|IlluminateQueryBuilder $builder */
 			foreach ($this->criteriaList as $criteria) {
-				$builder->orWhere(fn($query) => $criteria->apply($query));
+				$builder->orWhere(function($query) use ($criteria) {
+					return $criteria->apply($query);
+				});
 			}
 		});
 	}

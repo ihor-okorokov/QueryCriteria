@@ -6,12 +6,12 @@ trait HasDynamoDb {
 	/**
 	 * @var bool
 	 */
-	protected bool $useDynamoDb = false;
+	protected $useDynamoDb = false;
 
 	/**
 	 * @var bool
 	 */
-	protected bool $useDynamodbPartially = false;
+	protected $useDynamodbPartially = false;
 
 	/**
 	 * @return array
@@ -23,9 +23,9 @@ trait HasDynamoDb {
 	/**
 	 * @param  bool $enable
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function useDynamoDb(bool $enable = true): static {
+	public function useDynamoDb(bool $enable = true): self {
 		$this->useDynamoDb = $enable;
 
 		return $this;
@@ -34,9 +34,9 @@ trait HasDynamoDb {
 	/**
 	 * @param  bool $enable
 	 *
-	 * @return static
+	 * @return self
 	 */
-	public function useDynamodbPartially(bool $enable = true): static {
+	public function useDynamodbPartially(bool $enable = true): self {
 		$this->useDynamodbPartially = $enable;
 
 		return $this;

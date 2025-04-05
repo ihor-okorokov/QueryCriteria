@@ -84,7 +84,9 @@ trait HasSpecificSort {
 		if ($groupBy && $joins) {
 			DB::statement("set sql_mode='';");
 
-			$builder->groupBy(array_map(fn ($column) => $builder->queryColumn($column), $groupBy));
+			$builder->groupBy(array_map(function ($column) use ($builder) {
+				return $builder->queryColumn($column);
+			}, $groupBy));
 		}
 
 		return $builder->orderBy("{$tbName}.{$orderColumn}", $this->strategy);
