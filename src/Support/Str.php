@@ -11,7 +11,7 @@ class Str extends IlluminateSupportStr {
 	 *
 	 * @return bool
 	 */
-	public static function isEmpty(mixed $value, bool $useCoreEmptyFunction = false): bool {
+	public static function isEmpty($value, bool $useCoreEmptyFunction = false): bool {
 		return $value === '' ||
 					 $value === [] ||
 					 $value === null ||

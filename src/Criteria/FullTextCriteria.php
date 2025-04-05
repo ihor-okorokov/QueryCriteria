@@ -16,7 +16,7 @@ class FullTextCriteria implements Criteria {
 	/**
 	 * @var string|null
 	 */
-	protected string|null $text;
+	protected ?string $text;
 
 	/**
 	 * FullTextCriteria constructor.
@@ -26,7 +26,7 @@ class FullTextCriteria implements Criteria {
 	 *
 	 * @return void
 	 */
-	public function __construct(string $column, string|null $text = null) {
+	public function __construct(string $column, ?string $text = null) {
 		$this->column = $column;
 		$this->text = $text;
 	}

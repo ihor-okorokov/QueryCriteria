@@ -11,12 +11,12 @@ class Sort implements Criteria {
 	/**
 	 * @var string|null
 	 */
-	protected string|null $column = 'created_at';
+	protected ?string $column = 'created_at';
 
 	/**
 	 * @var string|null
 	 */
-	protected string|null $direction = 'asc';
+	protected ?string $direction = 'asc';
 
 	/**
 	 * Sort constructor.
@@ -26,7 +26,7 @@ class Sort implements Criteria {
 	 *
 	 * @return void
 	 */
-	public function __construct(string|null $column = 'created_at', string|null $direction = 'asc') {
+	public function __construct(?string $column = 'created_at', ?string $direction = 'asc') {
 		$this->column = $column ?: 'created_at';
 		$this->direction = $direction ?: 'asc';
 	}

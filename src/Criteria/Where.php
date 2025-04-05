@@ -33,7 +33,7 @@ class Where implements Criteria {
 	 *
 	 * @return void
 	 */
-	public function __construct(mixed $values, string|null $column = null, bool $equals = true) {
+	public function __construct($values, ?string $column = null, bool $equals = true) {
 		$this->values = Arr::withoutEmpty(Arr::wrap($values));
 		$this->column = $column ?: $this->column;
 		$this->equals = $equals;

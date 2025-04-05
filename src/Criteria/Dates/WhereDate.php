@@ -12,7 +12,7 @@ class WhereDate implements Criteria {
 	/**
 	 * @var Carbon|string
 	 */
-	protected Carbon|string $date;
+	protected $date;
 
 	/**
 	 * @var string
@@ -23,7 +23,7 @@ class WhereDate implements Criteria {
 	 * @param  Carbon|string $date
 	 * @param  string $column
 	 */
-	public function __construct(Carbon|string $date, string $column = 'created_at') {
+	public function __construct($date, string $column = 'created_at') {
 		$this->date = $date;
 		$this->column = $column;
 	}

@@ -26,8 +26,8 @@ use Illuminate\Database\Eloquent\Builder;
  * @method Builder|static queryRootAlias(string $alias)
  * @method static Builder|static queryRootAlias(string $alias)
  *
- * @method Builder|static queryColumn(string $column)
- * @method static Builder|static queryColumn(string $column)
+ * @method string queryColumn(string $column)
+ * @method static string queryColumn(string $column)
  */
 trait CriteriaScopes {
 	/**
@@ -35,7 +35,7 @@ trait CriteriaScopes {
 	 *
 	 * @var string|null
 	 */
-	protected string|null $queryRootAlias = null;
+	protected ?string $queryRootAlias = null;
 
 	/**
 	 * @param  Builder $query
