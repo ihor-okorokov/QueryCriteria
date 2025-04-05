@@ -41,9 +41,9 @@ trait HasUnion {
 	 * @param  CriteriaBuilder $criteriaBuilder
 	 * @param  bool $all
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function union(CriteriaBuilder $criteriaBuilder, bool $all = true): self {
+	public function union($criteriaBuilder, bool $all = true) {
 		$this->unions[] = ['builder' => $criteriaBuilder, 'all' => $all];
 
 		return $this;

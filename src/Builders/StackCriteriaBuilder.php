@@ -26,14 +26,14 @@ class StackCriteriaBuilder implements CriteriaBuilder {
 	 *
 	 * @var Collection|null
 	 */
-	protected ?Collection $generalCriteriaList = null;
+	protected $generalCriteriaList = null;
 
 	/**
 	 * Criteria list for DynamoDb strategy.
 	 *
 	 * @var Collection|null
 	 */
-	protected ?Collection $dynamoDbCriteriaList = null;
+	protected $dynamoDbCriteriaList = null;
 
 	/**
 	 * StackCriteriaBuilder constructor.

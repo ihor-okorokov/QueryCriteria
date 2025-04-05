@@ -23,9 +23,9 @@ trait HasDynamoDb {
 	/**
 	 * @param  bool $enable
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function useDynamoDb(bool $enable = true): self {
+	public function useDynamoDb(bool $enable = true) {
 		$this->useDynamoDb = $enable;
 
 		return $this;
@@ -34,9 +34,9 @@ trait HasDynamoDb {
 	/**
 	 * @param  bool $enable
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function useDynamodbPartially(bool $enable = true): self {
+	public function useDynamodbPartially(bool $enable = true) {
 		$this->useDynamodbPartially = $enable;
 
 		return $this;

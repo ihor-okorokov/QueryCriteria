@@ -1,10 +1,10 @@
-# QueryCriteria для PHP 7.4+ и Laravel 7+
+# QueryCriteria для PHP 7.3+ и Laravel 7+
 
-Это версия пакета, адаптированная для работы с PHP 7.4+ и Laravel 7+.
+Это версия пакета, адаптированная для работы с PHP 7.3+ и Laravel 7+.
 
 ## Совместимость
 
-- PHP 7.4 и выше
+- PHP 7.3 и выше
 - Laravel 7.0 и выше
 - DynamoDB 5.0 и выше
 
@@ -13,22 +13,23 @@
 Основная версия пакета требует PHP 8.2+ и Laravel 10+. Эта версия была адаптирована для работы со старыми версиями PHP и Laravel путем:
 
 1. Изменения зависимостей в composer.json
-2. Замены union типов (`string|null`) на nullable типы (`?string`)
-3. Удаления типизации свойств класса (property type hints)
-4. Замены возвращаемого типа `static` на `self` в интерфейсах и классах
-5. Замены стрелочных функций (`fn`) на стандартные функции с use
-6. Замены именованных параметров на позиционные
+2. Удаления nullable типов (`?string`) в сигнатурах методов
+3. Замены union типов (`string|null`) на документацию в PHPDoc
+4. Удаления типизации свойств класса (property type hints)
+5. Замены возвращаемого типа `static` на `self` в интерфейсах и классах
+6. Замены стрелочных функций (`fn`) на стандартные функции с use
+7. Замены именованных параметров на позиционные
 
 ## Основные изменения
 
 1. Изменены зависимости в composer.json:
-   - `"php": "^7.4|^8.0"` вместо `"php": "^8.2"`
+   - `"php": "^7.3|^7.4|^8.0"` вместо `"php": "^8.2"`
    - `"laravel/framework": "^7.0|^8.0|^9.0|^10.0"` вместо `"laravel/framework": ">=10.0"`
    - `"baopham/dynamodb": "^5.0|^6.0"` вместо `"baopham/dynamodb": "^6.4"`
 
 2. Исправлены типы в интерфейсах и классах:
    - Заменены возвращаемые типы `static` на `self`
-   - Заменены union типы на nullable типы
+   - Удалены nullable типы в сигнатурах методов
    - Удалены типизированные свойства классов
    - В ряде методов для совместимости интерфейсов сохранены типизации возвращаемых значений и параметров
 
@@ -45,11 +46,12 @@
 - **Удалены типизированные свойства**: `Where.php`, `WhereDate.php`, `WithRelations.php`, `GreaterThan.php`, `LessThan.php`, `ChainCriteria.php`
 - **Заменены union типы**: `FullTextCriteria.php`, `Sort.php`
 - **Изменены возвращаемые типы**: `HasCriteriaSelector.php`, `HasDynamoDb.php`, `HasUnion.php`
+- **Удалены nullable типы**: `CriteriaScopes.php`, `HasCriteriaSelector.php`, `StackCriteriaBuilder.php`, `WebCriteriaBuilder.php`, `CriteriaSelector.php`
 
 ## Установка
 
 ```bash
-composer require ihor-ok/query-criteria:1.3.5-php74
+composer require ihor-ok/query-criteria:1.3.6-php73
 ```
 
 ## Использование

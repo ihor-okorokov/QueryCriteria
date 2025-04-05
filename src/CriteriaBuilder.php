@@ -16,9 +16,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	 * @param  CriteriaBuilder $criteriaBuilder
 	 * @param  bool $all
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function union(self $criteriaBuilder, bool $all = true): self;
+	public function union($criteriaBuilder, bool $all = true);
 
 	/**
 	 * Returns builder by applies criteria.
@@ -73,9 +73,9 @@ interface CriteriaBuilder extends CriteriaSelector {
 	/**
 	 * @param  bool $enable
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function useDynamoDb(bool $enable = true): self;
+	public function useDynamoDb(bool $enable = true);
 
 	/**
 	 * @return bool

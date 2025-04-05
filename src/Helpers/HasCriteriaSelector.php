@@ -21,9 +21,9 @@ trait HasCriteriaSelector {
 	/**
 	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder $builder
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setQueryBuilder($builder): self {
+	public function setQueryBuilder($builder) {
 		$this->queryBuilder = $builder;
 
 		return $this;

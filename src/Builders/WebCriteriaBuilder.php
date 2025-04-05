@@ -42,7 +42,7 @@ abstract class WebCriteriaBuilder implements CriteriaBuilder {
 	protected $exceptCriteria = [];
 
 	/**
-	 * BaseCriteriaBuilder constructor.
+	 * WebCriteriaBuilder constructor.
 	 *
 	 * @param  Request|null $request
 	 *

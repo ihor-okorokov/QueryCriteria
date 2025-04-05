@@ -13,9 +13,9 @@ interface CriteriaSelector {
 	/**
 	 * @param  IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder $builder
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setQueryBuilder($builder): self;
+	public function setQueryBuilder($builder);
 
 	/**
 	 * @return IlluminateEloquentBuilder|IlluminateQueryBuilder|DynamoDbQueryBuilder|null
